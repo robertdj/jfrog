@@ -1,0 +1,17 @@
+Package: jfrog
+Title: Interact with JFrog's CRAN
+Version: 0.0.1
+Authors@R: person("Robert", "Dahl Jacobsen", role = c("aut", "cre"), email = "git@dahl-jacobsen.dk")
+Description: Interact with JFrog's CRAN through the REST API of JFrog's Artifactory.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports:
+    httr,
+    pkg.peek
+Suggests: 
+    testthat
+Remotes: 
+    robertdj/pkg.peek@v0.2.0

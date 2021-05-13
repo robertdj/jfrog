@@ -13,5 +13,6 @@ Imports:
     pkg.peek
 Suggests: 
     testthat
+    withr
 Remotes: 
     robertdj/pkg.peek@v0.3.0

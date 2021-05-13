@@ -14,7 +14,8 @@
 #' @return Response from [httr::POST()].
 #'
 #' @export
-upload_package <- function(package_archive, jfrog_url, api_key = jfrog_pat(), access_token = NULL) {
+upload_package <- function(package_archive, jfrog_url, api_key = jfrog_pat(), access_token = NULL)
+{
     cran_suffix <- make_cran_suffix(package_archive)
 
     full_url <- paste0(jfrog_url, "/", cran_suffix)
@@ -38,16 +39,17 @@ upload_package <- function(package_archive, jfrog_url, api_key = jfrog_pat(), ac
 }
 
 
-make_cran_suffix <- function(package_archive) {
-    if (package_ext(package_archive) == "tar.gz") {
+make_cran_suffix <- function(package_archive)
+{
+    if (pkg.peek::package_ext(package_archive) == "tar.gz") {
         cran_suffix <- "sources"
     } else {
         r_version <- pkg.peek::get_r_version(package_archive)
         version_for_cran <- paste0(r_version$major, ".", r_version$minor)
 
-        if (package_ext(package_archive) == "zip") {
+        if (pkg.peek::package_ext(package_archive) == "zip") {
             os <- "windows"
-        } else if (package_ext(package_archive) == "tgz") {
+        } else if (pkg.peek::package_ext(package_archive) == "tgz") {
             os <- "macosx"
         }
 

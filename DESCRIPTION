@@ -14,4 +14,4 @@ Imports:
 Suggests: 
     testthat
 Remotes: 
-    robertdj/pkg.peek@v0.2.0
+    robertdj/pkg.peek@v0.3.0

@@ -8,7 +8,7 @@ jfrog
 The goal of {jfrog} is to provide an interface to [JFrog's CRAN](https://www.jfrog.com/confluence/display/JFROG/CRAN+Repositories).
 
 
-## Installation
+# Installation
 
 {jfrog} is only on GitHub and can be installed using the [remotes package](https://remotes.r-lib.org) with the command:
 
@@ -17,12 +17,8 @@ remotes::install_github("robertdj/jfrog")
 ```
 
 
-## Example
+# Usage
 
-This is a basic example which shows you how to solve a common problem:
-
-``` r
-library(jfrog)
-## basic example code
-```
+The main function in {jfrog} is `upload_package`.
+Check its documentation to see how it works.
 

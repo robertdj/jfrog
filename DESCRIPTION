@@ -6,12 +6,15 @@ Description: Interact with JFrog's CRAN through the REST API of JFrog's Artifact
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
+URL: https://github.com/robertdj/jfrog
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
 Imports:
     httr,
     pkg.peek
 Suggests: 
-    testthat
+    pkgbuild,
+    testthat,
+    withr
 Remotes: 
-    robertdj/pkg.peek@v0.2.0
+    robertdj/pkg.peek@v0.3.0

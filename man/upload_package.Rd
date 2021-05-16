@@ -4,12 +4,17 @@
 \alias{upload_package}
 \title{Upload package archive to JFrog}
 \usage{
-upload_package(package_archive, jfrog_url, api_key = jfrog_pat(), access_token)
+upload_package(
+  package_archive,
+  jfrog_url,
+  api_key = jfrog_api(),
+  access_token = NULL
+)
 }
 \arguments{
 \item{package_archive}{Path to \code{tar.gz}, \code{zip} or \code{tgz} archive.}
 
-\item{jfrog_url}{URL}
+\item{jfrog_url}{Base URL of the JFrog CRAN.}
 
 \item{api_key}{JFrog API Key.}
 

@@ -7,35 +7,30 @@
 #' The rationale is that this is the desired behavior in CI pipelines.
 #'
 #' @param package_archive Path to `tar.gz`, `zip` or `tgz` archive.
-#' @param jfrog_url URL
+#' @param jfrog_url Base URL of the JFrog CRAN.
 #' @param api_key JFrog API Key.
 #' @param access_token JFrog access token.
 #'
 #' @return Response from [httr::POST()].
 #'
 #' @export
-upload_package <- function(package_archive, jfrog_url, api_key = jfrog_pat(), access_token = NULL)
+upload_package <- function(package_archive, jfrog_url, api_key = jfrog_api(), access_token = NULL)
 {
-    cran_suffix <- make_cran_suffix(package_archive)
-
-    full_url <- paste0(jfrog_url, "/", cran_suffix)
-
-    at_available <- FALSE
-    if (is.character(access_token) && nzchar(access_token, keepNA = FALSE)) {
-        at_available <- TRUE
+    if (is.character(access_token) && !is.na(api_key) && nzchar(access_token, keepNA = FALSE)) {
         auth_header <- httr::add_headers("Authorization" = paste("Bearer", access_token))
+    } else if (is.character(api_key) && !is.na(api_key) && nzchar(api_key, keepNA = FALSE)) {
+        auth_header <- httr::add_headers("X-JFrog-Art-Api" = api_key)
+    } else {
+        stop("No authentication credentials provided")
     }
 
-    if (isFALSE(at_available) && is.character(api_key) && nzchar(api_key, keepNA = FALSE))
-        auth_header <- httr::add_headers("X-JFrog-Art-Api" = api_key)
+    cran_suffix <- make_cran_suffix(package_archive)
 
-    response <- httr::POST(
-        url = full_url,
+    httr::POST(
+        url = paste0(jfrog_url, "/", cran_suffix),
         config = auth_header,
         body = httr::upload_file(package_archive)
     )
-
-    return(response)
 }
 
 

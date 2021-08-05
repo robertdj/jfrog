@@ -16,9 +16,9 @@
 #' @export
 upload_package <- function(package_archive, jfrog_url, api_key = jfrog_api(), access_token = NULL)
 {
-    if (is.character(access_token) && !is.na(api_key) && nzchar(access_token, keepNA = FALSE)) {
+    if (is_valid_key(access_token)) {
         auth_header <- httr::add_headers("Authorization" = paste("Bearer", access_token))
-    } else if (is.character(api_key) && !is.na(api_key) && nzchar(api_key, keepNA = FALSE)) {
+    } else if (is_valid_key(api_key)) {
         auth_header <- httr::add_headers("X-JFrog-Art-Api" = api_key)
     } else {
         stop("No authentication credentials provided")
@@ -31,6 +31,12 @@ upload_package <- function(package_archive, jfrog_url, api_key = jfrog_api(), ac
         config = auth_header,
         body = httr::upload_file(package_archive)
     )
+}
+
+
+is_valid_key <- function(x)
+{
+    is.character(x) && !is.na(x) && nzchar(x, keepNA = FALSE)
 }
 
 

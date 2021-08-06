@@ -13,6 +13,7 @@ Imports:
     httr,
     pkg.peek
 Suggests: 
+    httptest,
     pkgbuild,
     testthat,
     withr

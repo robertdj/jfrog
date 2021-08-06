@@ -3,19 +3,17 @@
 # - The variable api_key is set
 # - The variable access_token is set
 #
-# Note that this will upload the {jfrog} package to the JFrog CRAN.
+# Note that this will upload the generated package to the JFrog CRAN.
 
 source(here::here("tests", "testthat", "helper.R"))
 
 library(httptest)
 httptest::start_capturing(simplify = TRUE)
 
-# source_package_archive <- pkgbuild::build(binary = FALSE)
 source_package_archive <- create_empty_package("foo", "0.0.1", binary = FALSE, quiet = TRUE)
 jfrog::upload_package(source_package_archive, jfrog_url, api_key = api_key)
 # jfrog::upload_package(source_package_archive, jfrog_url, access_token = access_token)
 
-# binary_package_archive <- pkgbuild::build(binary = TRUE)
 binary_package_archive <- create_empty_package("foo", "0.0.1", binary = TRUE, quiet = TRUE)
 jfrog::upload_package(binary_package_archive, jfrog_url, api_key = api_key)
 # jfrog::upload_package(binary_package_archive, jfrog_url, access_token = access_token)

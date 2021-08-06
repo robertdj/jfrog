@@ -17,3 +17,15 @@ test_that("Error trying to upload w/o authentication", {
         regexp = "No authentication credentials provided"
     )
 })
+
+
+httptest::use_mock_api()
+
+test_that("Upload source package", {
+    source_package_archive <- pkgbuild::build(binary = FALSE, quiet = TRUE)
+    response <- jfrog::upload_package(source_package_archive, jfrog_url = "https://HOSTNAME/artifactory/api/cran/cran-local", api_key = "api_key")
+
+    expect_equal(httr::status_code(response), 201L)
+})
+
+httptest::stop_mocking()

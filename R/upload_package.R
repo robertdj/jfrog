@@ -16,9 +16,9 @@
 #' @export
 upload_package <- function(package_archive, jfrog_url, api_key = jfrog_api(), access_token = NULL)
 {
-    if (is.character(access_token) && !is.na(api_key) && nzchar(access_token, keepNA = FALSE)) {
+    if (is_valid_key(access_token)) {
         auth_header <- httr::add_headers("Authorization" = paste("Bearer", access_token))
-    } else if (is.character(api_key) && !is.na(api_key) && nzchar(api_key, keepNA = FALSE)) {
+    } else if (is_valid_key(api_key)) {
         auth_header <- httr::add_headers("X-JFrog-Art-Api" = api_key)
     } else {
         stop("No authentication credentials provided")
@@ -34,22 +34,28 @@ upload_package <- function(package_archive, jfrog_url, api_key = jfrog_api(), ac
 }
 
 
+is_valid_key <- function(x)
+{
+    is.character(x) && !is.na(x) && nzchar(x, keepNA = FALSE)
+}
+
+
 make_cran_suffix <- function(package_archive)
 {
-    if (pkg.peek::package_ext(package_archive) == "tar.gz") {
-        cran_suffix <- "sources"
-    } else {
-        r_version <- pkg.peek::get_r_version(package_archive)
-        version_for_cran <- paste0(r_version$major, ".", r_version$minor)
+    package_ext <- pkg.peek::package_ext(package_archive)
 
-        if (pkg.peek::package_ext(package_archive) == "zip") {
-            os <- "windows"
-        } else if (pkg.peek::package_ext(package_archive) == "tgz") {
-            os <- "macosx"
-        }
-
-        cran_suffix <- paste0("binaries?distribution=", os, "&rVersion=", version_for_cran)
+    if (package_ext == "tar.gz") {
+        return("sources")
     }
 
-    return(cran_suffix)
+    r_version <- pkg.peek::get_r_version(package_archive)
+    version_for_cran <- paste0(r_version$major, ".", r_version$minor)
+
+    if (package_ext == "zip") {
+        os <- "windows"
+    } else if (package_ext == "tgz") {
+        os <- "macosx"
+    }
+
+    paste0("binaries?distribution=", os, "&rVersion=", version_for_cran)
 }

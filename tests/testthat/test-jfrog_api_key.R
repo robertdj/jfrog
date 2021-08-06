@@ -1,10 +1,10 @@
 test_that("Get API key when present", {
     api_key <- withr::with_envvar(
-        new = c("JFROG_API_KEY" = "foo"),
+        new = c("JFROG_API_KEY" = "api_key"),
         jfrog_api()
     )
 
-    expect_equal(api_key, "foo")
+    expect_equal(api_key, "api_key")
 })
 
 

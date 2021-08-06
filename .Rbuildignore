@@ -1,4 +1,5 @@
 ^LICENSE\.md$
 ^jfrog\.Rproj$
 ^\.Rproj\.user$
+^save_requests\.R$
 ^\.github$

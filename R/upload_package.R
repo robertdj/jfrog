@@ -42,16 +42,18 @@ is_valid_key <- function(x)
 
 make_cran_suffix <- function(package_archive)
 {
-    if (pkg.peek::package_ext(package_archive) == "tar.gz") {
+    package_ext <- pkg.peek::package_ext(package_archive)
+
+    if (package_ext == "tar.gz") {
         return("sources")
     }
 
     r_version <- pkg.peek::get_r_version(package_archive)
     version_for_cran <- paste0(r_version$major, ".", r_version$minor)
 
-    if (pkg.peek::package_ext(package_archive) == "zip") {
+    if (package_ext == "zip") {
         os <- "windows"
-    } else if (pkg.peek::package_ext(package_archive) == "tgz") {
+    } else if (package_ext == "tgz") {
         os <- "macosx"
     }
 

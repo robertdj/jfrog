@@ -8,7 +8,7 @@ upload_package(
   package_archive,
   jfrog_url,
   api_key = jfrog_api(),
-  access_token = NULL
+  access_token = jfrog_access_token()
 )
 }
 \arguments{

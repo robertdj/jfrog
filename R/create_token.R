@@ -10,22 +10,26 @@
 #' @param expires_in The life span of the token in seconds. Defaults to 2 minutes.
 #' @param access_token A valid token.
 #'
-#' @return A parsed response from the token endpoint.
+#' @return A parsed response from the token endpoint, which is a list with entries "token_id", "access_token", "expires_in", "scope", "token_type".
 #'
 #' @export
 create_token <- function(jfrog_url, expires_in = 2 * 60, access_token = jfrog_access_token())
 {
     assertthat::assert_that(
-        assertthat::is.count(expires_in)
+        assertthat::is.count(expires_in),
+        expires_in > 0,
+        assertthat::is.string(access_token)
     )
 
     response <- httr::POST(
         url = paste0(jfrog_url, "/access/api/v1/tokens"),
         httr::add_headers("Authorization" = paste("Bearer", access_token)),
-        httr::content_type_json(),
-        query = list(
+        httr::content_type("application/x-www-form-urlencoded"),
+        httr::accept_json(),
+        body = list(
             expires_in = expires_in
-        )
+        ),
+        encode = "form"
     )
 
     httr::stop_for_status(response)

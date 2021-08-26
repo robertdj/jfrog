@@ -10,9 +10,13 @@
 #' @export
 jfrog_access_token <- function(quiet = TRUE)
 {
+    assertthat::assert_that(
+        assertthat::is.flag(quiet)
+    )
+
     access_token <- Sys.getenv("JFROG_ACCESS_TOKEN", unset = NA_character_)
 
-    if (is.na(access_token) && isFALSE(quiet)) {
+    if (is.na(access_token) && quiet) {
         message("JFrog access token is not available")
     }
 

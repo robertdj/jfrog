@@ -10,9 +10,13 @@
 #' @export
 jfrog_api <- function(quiet = TRUE)
 {
+    assertthat::assert_that(
+        assertthat::is.flag(quiet)
+    )
+
     api_key <- Sys.getenv("JFROG_API_KEY", unset = NA_character_)
 
-    if (is.na(api_key) && isFALSE(quiet)) {
+    if (is.na(api_key) && quiet) {
         message("JFrog API Key is not available")
     }
 

@@ -15,13 +15,22 @@
 #' @export
 create_token <- function(jfrog_url, expires_in = 2 * 60, access_token = jfrog_access_token())
 {
+    response <- download_token(jfrog_url, expires_in, access_token)
+    httr::stop_for_status(response)
+
+    httr::content(response, as = "parsed")
+}
+
+
+download_token <- function(jfrog_url, expires_in, access_token)
+{
     assertthat::assert_that(
         assertthat::is.count(expires_in),
         expires_in > 0,
         assertthat::is.string(access_token)
     )
 
-    response <- httr::POST(
+    httr::POST(
         url = paste0(jfrog_url, "/access/api/v1/tokens"),
         httr::add_headers("Authorization" = paste("Bearer", access_token)),
         httr::content_type("application/x-www-form-urlencoded"),
@@ -31,8 +40,4 @@ create_token <- function(jfrog_url, expires_in = 2 * 60, access_token = jfrog_ac
         ),
         encode = "form"
     )
-
-    httr::stop_for_status(response)
-
-    httr::content(response, as = "parsed")
 }

@@ -18,7 +18,7 @@ create_token(
 \item{access_token}{A valid token.}
 }
 \value{
-A parsed response from the token endpoint.
+A parsed response from the token endpoint, which is a list with entries "token_id", "access_token", "expires_in", "scope", "token_type".
 }
 \description{
 Get a token from the endpoint "access/api/v1/tokens" per \href{https://www.jfrog.com/confluence/display/JFROG/Artifactory+REST+API#ArtifactoryRESTAPI-AccessTokens}{JFrog's documentation}.

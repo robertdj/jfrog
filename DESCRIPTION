@@ -1,6 +1,6 @@
 Package: jfrog
 Title: Interact with JFrog's CRAN
-Version: 0.0.2
+Version: 0.1.0
 Authors@R: person("Robert", "Dahl Jacobsen", role = c("aut", "cre"), email = "git@dahl-jacobsen.dk")
 Description: Interact with JFrog's CRAN through the REST API of JFrog's Artifactory.
 License: MIT + file LICENSE

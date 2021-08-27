@@ -1,6 +1,6 @@
 #' Retrieve JFrog access token
 #'
-#' Retrieve a JFrog access token
+#' Retrieve a JFrog access token.
 #' Looks in the environment variable `JFROG_ACCESS_TOKEN`.
 #'
 #' @param quiet Whether or not to display a message if the access token is *not* available.

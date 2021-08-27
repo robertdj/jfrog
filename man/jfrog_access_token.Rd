@@ -13,6 +13,6 @@ jfrog_access_token(quiet = TRUE)
 The access token if available and \code{NA} otherwise.
 }
 \description{
-Retrieve a JFrog access token
+Retrieve a JFrog access token.
 Looks in the environment variable \code{JFROG_ACCESS_TOKEN}.
 }

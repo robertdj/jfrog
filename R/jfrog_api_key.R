@@ -16,7 +16,7 @@ jfrog_api <- function(quiet = TRUE)
 
     api_key <- Sys.getenv("JFROG_API_KEY", unset = NA_character_)
 
-    if (is.na(api_key) && quiet) {
+    if (is.na(api_key) && isFALSE(quiet)) {
         message("JFrog API Key is not available")
     }
 

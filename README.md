@@ -19,6 +19,27 @@ remotes::install_github("robertdj/jfrog")
 
 # Usage
 
-The main function in {jfrog} is `upload_package`.
-Check its documentation to see how it works.
+There are a few functions in {jfrog}.
+All interaction with JFrog requires authentication with either an API Key or an access token. 
+If you don't want to type supply this everytime {jfrog} looks in specific environment variables by default. 
+Check the documentation of `jfrog_api` and `jfrog_access_token`.
+
+
+# Upload package
+
+The function `upload_package` is used to upload packages to JFrog's CRAN.
+
+
+# Access tokens
+
+Tokens can be created with the function `create_token`:
+
+```
+token <- jfrog::create_token("<jfrog_url>")
+```
+
+A valid token is required to create a new token.
+A token can be created with the web interface through "Edit Profile" in the top right corner -> "Identify Token".
+
+I use a long-lived token to create short-lived tokens with `create_token`.
 

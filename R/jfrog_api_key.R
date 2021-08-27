@@ -8,7 +8,7 @@
 #' @return The API Key if available and `NA` otherwise.
 #'
 #' @export
-jfrog_api <- function(quiet = TRUE)
+jfrog_api_key <- function(quiet = TRUE)
 {
     assertthat::assert_that(
         assertthat::is.flag(quiet)

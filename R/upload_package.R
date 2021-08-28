@@ -14,7 +14,7 @@
 #' @return Response from [httr::POST()].
 #'
 #' @export
-upload_package <- function(package_archive, jfrog_url, api_key = jfrog_api(), access_token = jfrog_access_token())
+upload_package <- function(package_archive, jfrog_url, api_key = jfrog_api_key(), access_token = jfrog_access_token())
 {
     assertthat::assert_that(
         assertthat::is.readable(package_archive)

@@ -7,7 +7,7 @@
 upload_package(
   package_archive,
   jfrog_url,
-  api_key = jfrog_api(),
+  api_key = jfrog_api_key(),
   access_token = jfrog_access_token()
 )
 }

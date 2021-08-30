@@ -3,6 +3,7 @@ jfrog
 
 <!-- badges: start -->
 [![R build status](https://github.com/robertdj/jfrog/workflows/R-CMD-check/badge.svg)](https://github.com/robertdj/jfrog/actions)
+[![Codecov test coverage](https://codecov.io/gh/robertdj/jfrog/branch/main/graph/badge.svg)](https://codecov.io/gh/robertdj/jfrog?branch=main)
 <!-- badges: end -->
 
 The goal of {jfrog} is to provide an interface to [JFrog's CRAN](https://www.jfrog.com/confluence/display/JFROG/CRAN+Repositories).

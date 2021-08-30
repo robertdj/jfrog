@@ -15,7 +15,7 @@ create_empty_package <- function(package_name, version, ...) {
         "Title: Test package for pkg.peek",
         paste("Version:", version),
         "Authors@R: person('First', 'Last', role = c('aut', 'cre'), email = 'first.last@example.com')",
-        "Description: Test package for pkg.peek.",
+        "Description: Test package for {jfrog}.",
         "License: MIT",
         "Encoding: UTF-8",
         "LazyData: true"

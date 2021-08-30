@@ -1,0 +1,7 @@
+{
+  "token_id": "<token id>",
+  "access_token": "<access token>",
+  "expires_in": 60,
+  "scope": "applied-permissions/user",
+  "token_type": "Bearer"
+}

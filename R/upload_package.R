@@ -7,7 +7,7 @@
 #' The rationale is that this is the desired behavior in CI pipelines.
 #'
 #' @param package_archive Path to `tar.gz`, `zip` or `tgz` archive.
-#' @param jfrog_url Base URL of the JFrog CRAN.
+#' @param jfrog_url Base URL of the JFrog CRAN API. Note that if the URL of the CRAN is `https://HOSTNAME.jfrog.io/artifactory/cran-local` the URL of the API is `https://HOSTNAME.jfrog.io/artifactory/api/cran/cran-local`.
 #' @param api_key JFrog API Key.
 #' @param access_token JFrog access token.
 #'

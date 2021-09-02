@@ -32,7 +32,7 @@ upload_package <- function(package_archive, jfrog_url, api_key = jfrog_api_key()
 
     # TODO: safe way to add cran_suffix
 
-    httr::POST(
+    response <- httr::POST(
         url = paste0(jfrog_url, "/", cran_suffix),
         config = auth_header,
         body = httr::upload_file(package_archive)

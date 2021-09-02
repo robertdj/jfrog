@@ -37,6 +37,10 @@ upload_package <- function(package_archive, jfrog_url, api_key = jfrog_api_key()
         config = auth_header,
         body = httr::upload_file(package_archive)
     )
+
+    httr::stop_for_status(response)
+
+    return(response)
 }
 
 

@@ -7,7 +7,7 @@
 #' The rationale is that this is the desired behavior in CI pipelines.
 #'
 #' @param package_archive Path to `tar.gz`, `zip` or `tgz` archive.
-#' @param jfrog_url Base URL of the JFrog CRAN.
+#' @param jfrog_url Base URL of the JFrog CRAN API. Note that if the URL of the CRAN is `https://HOSTNAME.jfrog.io/artifactory/cran-local` the URL of the API is `https://HOSTNAME.jfrog.io/artifactory/api/cran/cran-local`.
 #' @param api_key JFrog API Key.
 #' @param access_token JFrog access token.
 #'
@@ -32,11 +32,15 @@ upload_package <- function(package_archive, jfrog_url, api_key = jfrog_api_key()
 
     # TODO: safe way to add cran_suffix
 
-    httr::POST(
+    response <- httr::POST(
         url = paste0(jfrog_url, "/", cran_suffix),
         config = auth_header,
         body = httr::upload_file(package_archive)
     )
+
+    httr::stop_for_status(response)
+
+    return(response)
 }
 
 

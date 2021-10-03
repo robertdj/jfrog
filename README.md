@@ -35,7 +35,7 @@ The function `upload_package` is used to upload packages to JFrog's CRAN.
 
 Tokens can be created with the function `create_token`:
 
-```
+``` r
 token <- jfrog::create_token("<jfrog_url>")
 ```
 

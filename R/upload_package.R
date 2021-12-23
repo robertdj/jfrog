@@ -28,12 +28,10 @@ upload_package <- function(package_archive, jfrog_url, api_key = jfrog_api_key()
         stop("No authentication credentials provided")
     }
 
-    cran_suffix <- make_cran_suffix(package_archive)
-
-    # TODO: safe way to add cran_suffix
+    upload_url <- make_upload_url(package_archive, jfrog_url)
 
     response <- httr::POST(
-        url = paste0(jfrog_url, "/", cran_suffix),
+        url = upload_url,
         config = auth_header,
         body = httr::upload_file(package_archive)
     )
@@ -50,12 +48,25 @@ is_valid_key <- function(x)
 }
 
 
-make_cran_suffix <- function(package_archive)
+make_upload_url <- function(package_archive, jfrog_url)
 {
+    parsed_jfrog_url <- httr::parse_url(jfrog_url)
+
+    empty_url_parts <- names(parsed_jfrog_url)[vapply(parsed_jfrog_url, is.null, logical(1))]
+    if (any(c("scheme", "hostname", "path") %in% empty_url_parts))
+        stop("JFrog CRAN URL must contain scheme, hostname and path")
+
+    if (!grepl("artifactory/api/", parsed_jfrog_url$path, fixed = TRUE))
+        stop("CRAN URL does not contain 'artifactory' path")
+
+    path_sans_trailing_slash <- sub("/+$", "", parsed_jfrog_url$path)
+    parsed_jfrog_url$path <- path_sans_trailing_slash
+
     package_ext <- pkg.peek::package_ext(package_archive)
 
     if (package_ext == "tar.gz") {
-        return("sources")
+        parsed_jfrog_url$path <- paste0(parsed_jfrog_url$path, "/sources")
+        return(httr::build_url(parsed_jfrog_url))
     }
 
     if (!pkg.peek::is_package_built(package_archive))
@@ -70,5 +81,8 @@ make_cran_suffix <- function(package_archive)
         os <- "macosx"
     }
 
-    paste0("binaries?distribution=", os, "&rVersion=", version_for_cran)
+    parsed_jfrog_url$path <- paste0(parsed_jfrog_url$path, "/binaries")
+    parsed_jfrog_url$query <- list(distribution = os, rVersion = version_for_cran)
+
+    return(httr::build_url(parsed_jfrog_url))
 }

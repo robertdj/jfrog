@@ -9,6 +9,22 @@ test_that("Error trying to upload w/o authentication", {
 })
 
 
+test_that("Error with malformed URL", {
+    expect_error(
+        upload_package(source_package, "jfrog_url", api_key = "api_key"),
+        regexp = "JFrog CRAN URL must contain scheme, hostname and path"
+    )
+})
+
+
+test_that("Error with URL with wrong path", {
+    expect_error(
+        upload_package(source_package, "https://HOSTNAME.jfrog.io/foo", api_key = "api_key"),
+        regexp = "CRAN URL does not contain 'artifactory' path"
+    )
+})
+
+
 httptest::use_mock_api()
 
 test_that("Upload source package", {

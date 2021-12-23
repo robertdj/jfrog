@@ -51,6 +51,14 @@ is_valid_key <- function(x)
 make_upload_url <- function(package_archive, jfrog_url)
 {
     parsed_jfrog_url <- httr::parse_url(jfrog_url)
+
+    empty_url_parts <- names(parsed_jfrog_url)[vapply(parsed_jfrog_url, is.null, logical(1))]
+    if (any(c("scheme", "hostname", "path") %in% empty_url_parts))
+        stop("JFrog CRAN URL must contain scheme, hostname and path")
+
+    if (!grepl("artifactory/api/", parsed_jfrog_url$path, fixed = TRUE))
+        stop("CRAN URL does not contain 'artifactory' path")
+
     path_sans_trailing_slash <- sub("/+$", "", parsed_jfrog_url$path)
     parsed_jfrog_url$path <- path_sans_trailing_slash
 

@@ -14,7 +14,7 @@ upload_package(
 \arguments{
 \item{package_archive}{Path to \code{tar.gz}, \code{zip} or \code{tgz} archive.}
 
-\item{jfrog_url}{Base URL of the JFrog CRAN.}
+\item{jfrog_url}{Base URL of the JFrog CRAN API. Note that if the URL of the CRAN is \verb{https://HOSTNAME.jfrog.io/artifactory/cran-local} the URL of the API is \verb{https://HOSTNAME.jfrog.io/artifactory/api/cran/cran-local}.}
 
 \item{api_key}{JFrog API Key.}
 

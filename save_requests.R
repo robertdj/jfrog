@@ -1,7 +1,7 @@
 # To run this script make sure that:
 # - The variables jfrog_url and jfrog_cran_url are set
 # - The variable api_key is set, e.g. with
-# api_key <- jfrog::jfrog_api()
+# api_key <- jfrog::jfrog_api_keyi()
 # - The variable access_token is set, e.g. with
 # access_token <- jfrog::jfrog_access_token()
 #

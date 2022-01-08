@@ -84,5 +84,5 @@ make_upload_url <- function(package_archive, jfrog_url)
     parsed_jfrog_url$path <- paste0(parsed_jfrog_url$path, "/binaries")
     parsed_jfrog_url$query <- list(distribution = os, rVersion = version_for_cran)
 
-    return(httr::build_url(parsed_jfrog_url))
+    httr::build_url(parsed_jfrog_url)
 }

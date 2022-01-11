@@ -23,7 +23,7 @@ remotes::install_github("robertdj/jfrog")
 There are a few functions in {jfrog}.
 All interaction with JFrog requires authentication with either an API Key or an access token. 
 If you don't want to type supply this everytime {jfrog} looks in specific environment variables by default. 
-Check the documentation of `jfrog_api` and `jfrog_access_token`.
+Check the documentation of `jfrog_api_key` and `jfrog_access_token`.
 
 
 # Upload package
